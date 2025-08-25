@@ -1,6 +1,7 @@
 import express from "express";
 import serverless from "serverless-http";
 import * as dynamoose from "dynamoose";
+import usersRoutes from "./routes/users.routes";
 
 const app = express();
 
@@ -15,6 +16,8 @@ const database = new dynamoose.aws.ddb.DynamoDB({
 dynamoose.aws.ddb.set(database);
 
 app.use(express.json());
+
+app.use("/users", usersRoutes);
 
 app.use((req, res, next) => {
   return res.status(404).json({
