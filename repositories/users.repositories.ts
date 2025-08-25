@@ -1,5 +1,6 @@
 import { UserDto } from "../dtos/users.dto";
 import { User } from "../models/users.model";
+import { v4 as uuid } from "uuid";
 
 class UsersRepository {
   async GetAll() {
@@ -12,7 +13,11 @@ class UsersRepository {
     return await User.delete(id);
   }
   async CreateUser(newUser: UserDto) {
-    return await User.create(newUser);
+    const userCreated = new User({
+      id: uuid(),
+      ...newUser,
+    });
+    return await userCreated.save();
   }
   async UpdateUser(id: string, updatedUser: UserDto) {
     return await User.update({ id }, updatedUser);
