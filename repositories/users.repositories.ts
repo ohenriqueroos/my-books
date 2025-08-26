@@ -1,4 +1,4 @@
-import { UserDto } from "../dtos/users.dto";
+import { IDeleteUserDto, UserDto } from "../dtos/users.dto";
 import { User } from "../models/users.model";
 import { v4 as uuid } from "uuid";
 

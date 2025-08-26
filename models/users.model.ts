@@ -9,7 +9,6 @@ export const UserSchema = new dynamoose.Schema(
     username: {
       type: String,
       required: true,
-      rangeKey: true,
       validate: (value) => {
         if (value.toString().length >= 4 && value.toString().length <= 20) {
           return true;
@@ -36,6 +35,10 @@ export const UserSchema = new dynamoose.Schema(
           storage: "iso",
         },
       },
+    },
+    password: {
+      type: String,
+      required: true,
     },
   },
   {
