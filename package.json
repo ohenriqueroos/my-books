@@ -4,7 +4,10 @@
   "description": "",
   "types": "module",
   "scripts": {
-    "dev": "serverless offline"
+    "dev": "serverless offline",
+    "dynamodb:start": "docker-compose up -d dynamodb-local",
+    "dynamodb:stop": "docker-compose down",
+    "start": "npm run dynamodb:start && serverless offline"
   },
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.585.0",
@@ -16,7 +19,6 @@
     "uuid": "^11.1.0"
   },
   "devDependencies": {
-    "@types/express": "^5.0.3",
-    "serverless-dynamodb-local": "^0.2.40"
+    "@types/express": "^5.0.3"
   }
 }

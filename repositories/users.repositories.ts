@@ -1,6 +1,6 @@
-import { IDeleteUserDto, UserDto } from "../dtos/users.dto";
+import { GetUserDto, UserDto } from "../dtos/users.dto";
 import { User } from "../models/users.model";
-import { v4 as uuid } from "uuid";
+import { v7 as uuid } from "uuid";
 
 class UsersRepository {
   async GetAll() {
@@ -17,7 +17,7 @@ class UsersRepository {
       id: uuid(),
       ...newUser,
     });
-    return await userCreated.save();
+    return (await userCreated.save()) as unknown as GetUserDto;
   }
   async UpdateUser(id: string, updatedUser: UserDto) {
     return await User.update({ id }, updatedUser);

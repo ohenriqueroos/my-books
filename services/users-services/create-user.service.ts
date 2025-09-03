@@ -1,4 +1,4 @@
-import { UserDto } from "../../dtos/users.dto";
+import { GetUserDto, UserDto } from "../../dtos/users.dto";
 import UsersRepository from "../../repositories/users.repositories";
 import crypto from "node:crypto";
 
@@ -35,7 +35,17 @@ class CreateUserService {
 
       const userCreated = await UsersRepository.CreateUser(user);
 
-      return { user: userCreated };
+      const userDto = {
+        id: userCreated.id,
+        username: userCreated.username,
+        name: userCreated.name,
+        email: userCreated.email,
+        birthDate: userCreated.birthDate,
+        createdAt: userCreated.createdAt,
+        updatedAt: userCreated.updatedAt,
+      };
+
+      return userDto;
     } catch (error) {
       throw error;
     }

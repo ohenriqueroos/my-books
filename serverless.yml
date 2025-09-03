@@ -11,19 +11,12 @@ stages:
       tableName: "users-table-${sls:stage}"
 
 plugins:
-  - serverless-dynamodb-local
   - serverless-offline
 
 custom:
-  dynamodb:
-    start:
-      port: 8000
-      inMemory: true
-      migrate: true
-      seed: false
-      convertEmptyValues: true
-    stages:
-      - dev
+  serverless-offline:
+    httpPort: 3000
+    host: 0.0.0.0
 
 provider:
   name: aws
@@ -45,6 +38,9 @@ provider:
             - Fn::GetAtt: [UsersTable, Arn]
   environment:
     USERS_TABLE: ${param:tableName}
+    DYNAMODB_ENDPOINT: ${env:DYNAMODB_ENDPOINT, 'http://localhost:8000'}
+    AWS_ACCESS_KEY_ID: ${env:AWS_ACCESS_KEY_ID, 'local'}
+    AWS_SECRET_ACCESS_KEY: ${env:AWS_SECRET_ACCESS_KEY, 'local'}
 
 functions:
   api:

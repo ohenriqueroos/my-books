@@ -12,6 +12,8 @@ export class GetUserDto {
   name: string;
   email: string;
   birthDate: Date;
+  createdAt?: Date;
+  updatedAt?: Date;
 }
 
 export interface IDeleteUserDto {
